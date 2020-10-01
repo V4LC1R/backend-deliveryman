@@ -1,0 +1,26 @@
+module.exports = {
+    users:{
+        'read:any':['*','!id']
+    },
+    roles:{
+        'read:own':['*','!id','!user_id']
+    },
+    banneds:{
+        'read:own':['*','!id','!user_id']
+    },
+    tender_types:{
+        'read:own':['*','!id'],
+    },
+    tenders:{
+        'create:own':['*','!typing_id','!id','!company_id'],
+        'read:own':['*','!id','!company_id'],
+        'update:own':['*','!tender_cod','!id','!typing_id','!price','!company_id','!tender_cod','!status'],
+        'delete:own':['*','!tender_cod','!price','!status','!company_id']
+    },
+    candidates:{
+        'create:own':['*','!tender_id'],
+        'read:any':['*','!tender_id'],
+        'update:own':['*','!deliveryman_id','!tender_id'],
+        'delete:own':['*','!id','!deliveryman_id','!tender_id','!type_candidate']
+    }
+}
