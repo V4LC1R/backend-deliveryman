@@ -9,10 +9,7 @@ module.exports={
 
         if(!job) return res.status(401).json({err:'This job is not exist'})
 
-       const 
-
-
-        return
+       
     },
     async forDelete(number,user,res){
 

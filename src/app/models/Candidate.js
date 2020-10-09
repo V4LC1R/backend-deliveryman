@@ -1,6 +1,5 @@
 const {Model,DataTypes} = require('sequelize');
 const Crypto = require('crypto');
-const candidate = require('../services/policy/candidate');
 
 class Candidate extends Model{
     static init(sequelize){
@@ -30,7 +29,7 @@ class Candidate extends Model{
 
         this.belongsTo(model.Job,{foreignKey:'job_id',as:'Job'})
 
-        this.belongsTo(model.Candidate_type,{foreignKey:'candidate_type', as: 'Type'})
+       //this.belongsTo(model.Candidate_type,{foreignKey:'candidate_type', as: 'Type'})
         
     }
 }

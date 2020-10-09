@@ -1,6 +1,6 @@
 const {DataTypes,Model} = require('sequelize')
 
-class Tender_type extends Model{
+class Job_type extends Model{
     static init(sequelize){
         super.init(
             {
@@ -16,4 +16,4 @@ class Tender_type extends Model{
     }
 }
 
-module.exports = Tender_type
+module.exports = Job_type

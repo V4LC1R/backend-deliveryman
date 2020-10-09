@@ -1,4 +1,4 @@
-const { where } = require('sequelize/types')
+
 const Job = require('../models/Job')
 const {Policys}= require('../services')
 module.exports={
@@ -20,10 +20,11 @@ module.exports={
     async store(req,res){
         const {price,start_day,end_day,start_office_hour,end_office_hour} = req.body
 
+        // precisa colocar o typing id
 
         const job = await Job.create({
             company_id:req.userId,
-            job_cod:'',
+            typing_id:'',
             price,
             status: false,
             start_day,

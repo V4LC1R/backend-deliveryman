@@ -8,7 +8,7 @@ module.exports={
 
         const {name,email,password,cpf_cnpj,latitude,longitude} = req.body
 
-        const verify = await User.findOne({where:{cpf_cnpj}})
+        const verify = await User.findOne({where:{cpf_cnpj,email}})
         if(verify)
             return res.status(400).json({err:'This user already exist'})
 

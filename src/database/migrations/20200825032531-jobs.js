@@ -19,6 +19,7 @@ module.exports = {
         onUpdate:'CASCADE',
         onDelete:'CASCADE'
       },
+      //module type
       typing_id:{
         type:Sequelize.INTEGER.UNSIGNED,
         allowNull:false,

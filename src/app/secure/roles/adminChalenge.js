@@ -3,36 +3,42 @@ module.exports={
         'create:any':['*'],
         'read:any':['*'],
         'update:any':['*'],
-        'delete:own':['*']
+        'delete:any':['*']
     },
     roles:{
         'create:any':['*'],
         'read:any':['*'],
         'update:any':['*'],
-        'delete:own':['*']
+        'delete:any':['*']
     },
     banneds:{
         'create:any':['*'],
         'read:any':['*'],
         'update:any':['*'],
-        'delete:own':['*']
+        'delete:any':['*']
     },
     types:{
-        'create:own':['*'],
-        'read:any':['*'],
-        'update:own':['*'],
-        'delete:own':['*']
-    },
-    tenders:{
         'create:any':['*'],
         'read:any':['*'],
-        'update:own':['*'],
-        'delete:own':['*']
+        'update:any':['*'],
+        'delete:any':['*']
+    },
+    job:{
+        'create:any':['*'],
+        'read:any':['*'],
+        'update:any':['*'],
+        'delete:any':['*']
     },
     candidates:{
         'create:any':['*'],
         'read:any':['*'],
         'update:any':['*'],
-        'delete:own':['*']
+        'delete:any':['*']
+    },
+    proposal :{
+        'create:any':['*'],
+        'read:any':['*'],
+        'update:any':['*'],
+        'delete:any':['*']
     }
 }

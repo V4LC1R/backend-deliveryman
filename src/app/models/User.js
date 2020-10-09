@@ -23,7 +23,7 @@ class User extends Model{
     }
 
     static associate(model){
-        this.belongsTo(model.Role,{foreignKey:'user_id',as:'Role'})
+        this.hasOne(model.Role,{foreignKey:'user_id',as:'Role'})
 
         this.hasMany(model.Banned,{foreignKey:'user_id',as:'Bans'})
 

@@ -25,11 +25,6 @@ module.exports= {
             return req.userId= decoded.id
         })
 
-        const banned = await Banned.findOne({where:{user_id:req.userId,status:true}})
-        
-        if(banned)
-            return res.status(401).json({err:`You are Banned and this Why: ${banned.why}`})
-
         next()
     }
 }
