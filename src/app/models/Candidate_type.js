@@ -12,7 +12,7 @@ class Candidate_type extends Model{
         )
     }
     static associate(model){
-        this.hasMany(model.Candidate,{foreignKey:'type_candidate',as:'Type Candidate'})
+        this.hasMany(model.Candidate,{foreignKey:'candidate_type',as:'Type Candidate'})
     }
 }
 

@@ -19,7 +19,7 @@ module.exports= {
         if(!/^Bearer$/i.test(barer))
             return res.status(401).json({err:'TOKEN malformatted'});
 
-        jwt.verify(token,hashJWT,(err,decoded)=>{
+         jwt.verify(token,hashJWT,(err,decoded)=>{
             if(err)
                 return res.status(401).json({err:'TOKEN Invalid'})
             return req.userId= decoded.id

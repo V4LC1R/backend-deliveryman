@@ -5,8 +5,9 @@ class Candidate extends Model{
     static init(sequelize){
         super.init(
             {
-                why:DataTypes.TEXT,
-                status:DataTypes.BOOLEAN
+                observation:DataTypes.TEXT,
+                status:DataTypes.BOOLEAN,
+                number:DataTypes.STRING
             },
             {
                 sequelize
@@ -29,7 +30,7 @@ class Candidate extends Model{
 
         this.belongsTo(model.Job,{foreignKey:'job_id',as:'Job'})
 
-       //this.belongsTo(model.Candidate_type,{foreignKey:'candidate_type', as: 'Type'})
+       this.belongsTo(model.Candidate_type,{foreignKey:'candidate_type',as: 'Type'})
         
     }
 }

@@ -7,6 +7,8 @@ const User = require("../../models/User")
 module.exports ={
     async forCreate(number,user,res){
 
+        console.log(number)
+
         const job = await Job.findOne({where:{number}})
 
         //valida a existencia do job

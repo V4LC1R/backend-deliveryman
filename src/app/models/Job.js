@@ -9,10 +9,11 @@ class Job extends Model {
                 status:DataTypes.BOOLEAN,
                 start_day:DataTypes.DATE,
                 number:DataTypes.STRING,
+                amount:DataTypes.INTEGER,
                 end_day:DataTypes.DATE,
                 start_office_hour:DataTypes.TIME,
                 end_office_hour:DataTypes.TIME,
-                //MODULE TYPE
+                
             },
             {
                 sequelize
@@ -46,7 +47,7 @@ class Job extends Model {
 
         this.belongsTo(model.User,{foreignKey:'company_id',as:'Company'})
 
-        this.hasMany(model.Candidate,{foreignKey:'job_id',as:'Candidates'})
+        this.hasMany(model.Candidate,{foreignKey:'job_id',as:'Candidate'})
     }
 }
 

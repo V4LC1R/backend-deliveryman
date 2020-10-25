@@ -24,6 +24,6 @@ module.exports={
         'delete:own':['*','!id','!deliveryman_id','!tender_id','!type_candidate']
     },
     candidate:{
-        
+        'read:any':['*','!deliveryman_id','!job_id']
     }
 }

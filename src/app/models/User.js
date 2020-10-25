@@ -31,6 +31,7 @@ class User extends Model{
 
         this.hasMany(model.Candidate,{foreignKey:'deliveryman_id',as :'Applications'})
     }
+
 }
 
 module.exports = User

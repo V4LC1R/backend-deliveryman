@@ -2,15 +2,39 @@ const Banned = require("../models/Banned")
 const Candidate = require("../models/Candidate")
 const Job = require('../models/Job')
 const {Policys}= require('../services')
+
+const AcessControl = require('accesscontrol');
+
+const difines = require('../secure/index');
+const Role = require("../models/Role");
+
+const concierge = new AcessControl(difines);
+
+
 module.exports={
     async index(req,res){
         const candidates = await Candidate.findAll({where:{deliveryman_id:req.userId}})
 
-        return res.json(candidates)
+        const user = await Role.findOne({where:{user_id:req.userId}})
+
+        const permission = concierge.can(user.role).readOwn('job')
+
+        let only =[]
+
+        candidates.map(candidate=>{
+          only.push(permission.filter(candidate))
+        })
+
+        return res.json(only)
 
     },
     async show(req,res){
         const {number} = req.params
+
+        const user = await Role.findOne({where:{user_id:req.userId}})
+
+        const permission = concierge.can(user.role).readOwn('job')
+
 
         const candidate = await Candidate.findOne({
             where:{
@@ -23,18 +47,25 @@ module.exports={
             }]
         })
 
-        return res.json(candidate)
+
+
+        return res.json(permission.filter(candidate))
     },
     async store(req,res){
-        const {number,observation}=req.body
+        const {number,observation,must}=req.body
 
-        await Policys.Candidate.forCreate(number,req.userId,res)
+        console.log(req.body)
+
+       await Policys.Candidate.forCreate(number,req.userId,res)
+
+       const job = await Job.findOne({where:{number}})
 
         const candidate = await Candidate.create({
-            tender_id:tender.id,
+            job_id:job.id,
             deliveryman_id:req.userId,
-            type_candidate:1,
+            candidate_type:1,
             number:'',
+            amount,
             observation
         })
 
