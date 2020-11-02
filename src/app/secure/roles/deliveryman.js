@@ -12,12 +12,12 @@ module.exports = {
         'read:own':['*','!id','!user_id'],
     },
     job:{
-        'read:own':['*','!id','!company_id'],
+        'read:own':['*','!id','!company_id','!status','!typing_id','!Candidate','!remaining'],
     },
     candidates:{
-        'create:any':['*','!tender_id'],
-        'read:any':['*','!tender_id'],
-        'update:own':['*','!deliveryman_id','!tender_id'],
-        'delete:own':['*','!id','!deliveryman_id','!tender_id','!type_candidate']
+        'create:any':['*','!job_id'],
+        'read:any':['*','!job_id'],
+        'update:own':['*','!deliveryman_id','!job_id'],
+        'delete:own':['*','!id','!deliveryman_id','!job_id','!candidate_type']
     }
 }

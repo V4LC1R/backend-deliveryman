@@ -1,34 +1,38 @@
 const Banned = require("../models/Banned")
 const Candidate = require("../models/Candidate")
 const Job = require('../models/Job')
+const Role = require("../models/Role");
 const {Policys}= require('../services')
 
 const AcessControl = require('accesscontrol');
 
 const difines = require('../secure/index');
-const Role = require("../models/Role");
+
 
 const concierge = new AcessControl(difines);
 
 
 module.exports={
+    // como orignalmente apenas o deliveryman faz a candidates
+    //ent apenas ele vai ter acesso ao controller principal 
     async index(req,res){
         const candidates = await Candidate.findAll({where:{deliveryman_id:req.userId}})
 
-        const user = await Role.findOne({where:{user_id:req.userId}})
-
-        const permission = concierge.can(user.role).readOwn('job')
+        const permission = concierge.can('deliveryman').readOwn('job')
 
         let only =[]
 
         candidates.map(candidate=>{
-          only.push(permission.filter(candidate))
+            let a = permission.filter(candidate.dataValues)
+          only.push(a)
         })
 
         return res.json(only)
 
     },
     async show(req,res){
+        // como orignalmente apenas o deliveryman faz a candidates
+        //ent apenas ele vai ter acesso ao controller principal 
         const {number} = req.params
 
         const user = await Role.findOne({where:{user_id:req.userId}})
@@ -49,10 +53,10 @@ module.exports={
 
 
 
-        return res.json(permission.filter(candidate))
+        return res.json(permission.filter(candidate.dataValues))
     },
     async store(req,res){
-        const {number,observation,must}=req.body
+        const {number,observation,amount}=req.body
 
         console.log(req.body)
 

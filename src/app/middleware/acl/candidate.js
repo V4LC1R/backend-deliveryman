@@ -18,6 +18,17 @@ module.exports={
             return res.status(401).json({err:"You don't have permission"})
         }
     },
+   async PermissionRead(req,res,next){
+        const user = await Role.findOne({where:{user_id:req.userId}})
+
+        const permission = concierge.can(user.role).readAny('candidates')
+
+        if(permission.granted){
+            next()
+        }else{
+            return res.status(401).json({err:"You don't have permission"})
+        }
+    },
     PermissionUpdate(req,res,next){
 
     },

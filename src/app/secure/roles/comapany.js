@@ -13,17 +13,17 @@ module.exports={
     },
     job:{
         'create:any':['*','!typing_id','!id'],
-        'read:own':['*','!id'],
-        'update:own':['*','!tender_cod','!id','typing_id'],
-        'delete:any':['*','!tender_cod','!price','!status']
+        'read:any':['*','!id','!company_id'],
+        'update:own':['*','!id'],
+        'delete:any':['*','!price','!status']
     },
     proposal:{
-        'create:own':['*','!deliveryman_id','!tender_id'],
+        'create:own':['*','!deliveryman_id'],
         'read:any':['*','!deliveryman_id','!tender_id'],
-        'update:own':['*','!deliveryman_id','!tender_id'],
-        'delete:own':['*','!id','!deliveryman_id','!tender_id','!type_candidate']
+        'update:own':['*','!deliveryman_id'],
+        'delete:own':['*','!id','!deliveryman_id']
     },
     candidate:{
-        'read:any':['*','!deliveryman_id','!job_id']
+        'read:own':['*','!deliveryman_id','!job_id',]
     }
 }

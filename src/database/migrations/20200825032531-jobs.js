@@ -42,6 +42,10 @@ module.exports = {
         type:Sequelize.INTEGER,
         allowNull:false
       },
+      remaining:{
+        type:Sequelize.INTEGER,
+        allowNull:true
+      },
       status:{
         type:Sequelize.BOOLEAN,
         allowNull:false
@@ -60,6 +64,14 @@ module.exports = {
       },
       end_office_hour:{
         type:Sequelize.TIME,
+        allowNull:false
+      },
+      latitude:{
+        type:Sequelize.DECIMAL(9,6),
+        allowNull:false
+      },
+      longitude:{
+        type:Sequelize.DECIMAL(9,6),
         allowNull:false
       },
       created_at:{

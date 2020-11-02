@@ -31,11 +31,9 @@ module.exports ={
         if(job.job_type ==2)
             return res.status(401).json({err:"This job is not open"})
 
-        //conta a quantia de candidaturas aceitas
-        const much = await Candidate.count({where:{job_id:job.id,status:true}})
 
-        //Compara se a quantia aceita e maior do que o numeros de vagas
-        if(much > job.amount)
+        //Verifica se tem vagas
+        if(job.remaining == 0)
             return res.status(401).json({err:"You cannot apply for this job"})
 
         return

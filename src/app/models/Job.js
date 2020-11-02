@@ -49,6 +49,7 @@ class Job extends Model {
 
         this.hasMany(model.Candidate,{foreignKey:'job_id',as:'Candidate'})
     }
+
 }
 
 module.exports=Job

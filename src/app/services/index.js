@@ -4,6 +4,7 @@ const Candidate = require('./policy/candidate')
 const Job = require('./policy/job')
 
 const inContract = require('./detector/inContract')
+const Haversine = require('./geolocalization/haversine')
 
 module.exports ={
     Policys:{
@@ -14,5 +15,6 @@ module.exports ={
     },
     Detector:{
         inContract
-    }
+    },
+    Haversine
 }

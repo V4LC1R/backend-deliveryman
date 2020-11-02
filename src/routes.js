@@ -30,15 +30,37 @@ routes.post('/bait', async (req,res)=>{
   return res.json(req.body)
 })
 
-
+//Global Middleware
 routes.use(verifyToken)
 routes.use(verifyBanned)
+
+//<--------- Candidate ---------->
+//deliveryman
 
 routes.use('/candidate',CandidateMiddleware.PermissionCreate)
 routes.post('/candidate',CandidateController.store)
 
+routes.use('/candidate/:number',CandidateMiddleware.PermissionRead)
+routes.get('/candidate/:number',CandidateController.show)
+
+routes.use('/candidates',CandidateMiddleware.PermissionRead)
+routes.post('/candidates',CandidateController.index)
+
+//Company
+
+//<---------- JOB ------------>
+//Company
 routes.use('/job',JobMiddleware.PermissionCreate)
 routes.post('/job',JobController.store)
 
+routes.use('/job/:number',JobMiddleware.PermissionRead)
+routes.get('/job/:number',JobController.show)
+
+routes.use('/jobs',JobMiddleware.PermissionRead)
+routes.get('/jobs',JobController.index)
+
+//deliveryman
+
+//<-------- Proposal  -------->
 
 module.exports = routes

@@ -48,6 +48,8 @@ module.exports={
 
         await Policys.Proposal.forCreate(number,cpf_cnpj,req.userId,res)
 
+        const deliveryman = await User.findOne({where:{cpf_cnpj}})
+
         const job = await Job.findOne({where:{number}})
 
         const candidate = await Candidate.create({

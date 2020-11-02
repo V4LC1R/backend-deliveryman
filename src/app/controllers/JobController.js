@@ -1,12 +1,32 @@
-
+const Role = require('../models/Role')
 const Job = require('../models/Job')
+
 const {Policys}= require('../services')
+
+const AcessControl = require('accesscontrol');
+const difines = require('../secure/index');
+const job = require('../services/policy/job');
+const concierge = new AcessControl(difines);
+
 module.exports={
     async index(req,res){
-        const jobs = await Job.findAll({where:{status:false}})
+        // como orignalmente apenas a company faz os jobs
+        //ent apenas ela vai ter acesso ao controller principal 
+        const jobs = await Job.findAll({where:{company_id:req.userId},include:'Candidate'})
 
-        return jobs
+        const user = await Role.findOne({where:{user_id:req.userId}})
 
+        const permission = concierge.can(user.role).readOwn('job')
+
+        let only = []
+
+        jobs.map(c=>{
+           let b = permission.filter(c.dataValues)
+
+           return only.push(b)
+        })
+
+        return res.json(only)
     },
     async show(req,res){
 
@@ -16,10 +36,10 @@ module.exports={
 
         const permission = concierge.can(user.role).readOwn('job')
 
-        const job = await Job.findOne({where:{number}})
+        const job = await Job.findOne({where:{number,company_id:req.userId}})
         
 
-        return res.json(permission.filter(job))
+        return res.json(permission.filter(job.dataValues))
 
     },
     async store(req,res){
