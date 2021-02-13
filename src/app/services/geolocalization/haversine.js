@@ -1,5 +1,8 @@
-const {QueryTypes} = require('sequelize')
-
+const dbconfig=require("../../../config/database");
+const {QueryTypes,Sequelize } = require('sequelize')
+//const sequelize = new Sequelize(dbconfig)
+const sequelize = require('../../../database/index')
+const Job = require('../../models/Job');
 
 module.exports = {
     async nearBy(lat,lgt,distantce){
@@ -10,14 +13,18 @@ module.exports = {
         + sin(radians(${lat}))
         * sin(radians(latitude))))`
 
-        const jobs = await sequelize
-                    .query(`SELECT *, ${haversine} as dist 
+        
+
+        const jobs = await sequelize.query(`SELECT *, ${haversine} as dist 
                             FROM jobs 
                             WHERE status = false
                             HAVING dist < ${distantce}`,
-                        {type:QueryTypes.SELECT})
+                        {model:Job,mapToModel:true})
+
+        console.log(jobs)
 
         return jobs
+        
     }
 
     

@@ -14,6 +14,7 @@ const {verifyBanned}=require('./app/middleware/banned')
 const User = require('./app/models/User');
 const Job = require('./app/models/Job');
 const Candidate = require('./app/models/Candidate');
+const JobControllerToDeliveryMan = require('./app/controllers/JobControllerToDeliveryMan');
 
 const routes = express.Router()
 
@@ -35,7 +36,7 @@ routes.use(verifyToken)
 routes.use(verifyBanned)
 
 //<--------- Candidate ---------->
-//deliveryman
+
 
 routes.use('/candidate',CandidateMiddleware.PermissionCreate)
 routes.post('/candidate',CandidateController.store)
@@ -46,10 +47,10 @@ routes.get('/candidate/:number',CandidateController.show)
 routes.use('/candidates',CandidateMiddleware.PermissionRead)
 routes.post('/candidates',CandidateController.index)
 
-//Company
+routes.get('/jobs/:latitude/:longitude/:distance',JobControllerToDeliveryMan.index)
 
 //<---------- JOB ------------>
-//Company
+
 routes.use('/job',JobMiddleware.PermissionCreate)
 routes.post('/job',JobController.store)
 
@@ -59,7 +60,7 @@ routes.get('/job/:number',JobController.show)
 routes.use('/jobs',JobMiddleware.PermissionRead)
 routes.get('/jobs',JobController.index)
 
-//deliveryman
+
 
 //<-------- Proposal  -------->
 

@@ -43,7 +43,7 @@ module.exports={
 
     },
     async store(req,res){
-        const {price,amount,start_day,end_day,start_office_hour,end_office_hour} = req.body
+        const {price,amount,start_day,end_day,start_office_hour,end_office_hour,latitude,longitude} = req.body
 
         console.log(req.body)
         // precisa colocar o typing id
@@ -59,8 +59,9 @@ module.exports={
             start_day,
             end_day,
             start_office_hour,
-            end_office_hour
-
+            end_office_hour,
+            latitude,
+            longitude
         })
 
 

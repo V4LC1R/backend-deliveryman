@@ -3,9 +3,12 @@ const {Haversine} = require('../services/index')
 
 module.exports={
     async index(req,res){
-        const {latitude,longitude,distance}=req.body
+        const {latitude,longitude,distance}=req.params
 
-        const job = Haversine.nearBy(latitude,longitude,distance)
+        const job = await Haversine.nearBy(latitude,longitude,distance)
+
+        console.log(job)
+        return res.json(job)
     },
     async show(req,res){
         

@@ -14,6 +14,8 @@ class Job extends Model {
                 end_day:DataTypes.DATE,
                 start_office_hour:DataTypes.TIME,
                 end_office_hour:DataTypes.TIME,
+                latitude:DataTypes.DECIMAL(9,6),
+                longitude:DataTypes.DECIMAL(9,6)
                 
             },
             {

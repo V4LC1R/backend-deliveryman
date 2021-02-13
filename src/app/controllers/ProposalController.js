@@ -55,6 +55,7 @@ module.exports={
         const candidate = await Candidate.create({
             job_id:job.id,
             deliveryman_id:deliveryman.id,
+            //usa-se o tipo 2, pois essa é a rota de criação de propostas diretas
             type_candidate:2,
             number:'',
             observation
