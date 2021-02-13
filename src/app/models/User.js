@@ -10,8 +10,6 @@ class User extends Model{
                 cpf_cnpj:DataTypes.STRING,
                 email:DataTypes.STRING,
                 password:DataTypes.STRING,
-                longitude:DataTypes.INTEGER,
-                latitude:DataTypes.INTEGER
             },
             {
                 sequelize

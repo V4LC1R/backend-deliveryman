@@ -1,7 +1,6 @@
-const Proposal = require('./policy/proposal')
-const Contract = require('./policy/contract')
-const Candidate = require('./policy/candidate')
-const Job = require('./policy/job')
+const Proposal = require('./policy/ServicesPolicysProposal')
+const Candidate = require('./policy/ServicesPolicysCandidate')
+const Job = require('./policy/ServicesPolicysJob')
 
 const inContract = require('./detector/inContract')
 const Haversine = require('./geolocalization/haversine')

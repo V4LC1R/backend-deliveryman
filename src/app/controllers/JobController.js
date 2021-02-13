@@ -5,7 +5,7 @@ const {Policys}= require('../services')
 
 const AcessControl = require('accesscontrol');
 const difines = require('../secure/index');
-const job = require('../services/policy/job');
+
 const concierge = new AcessControl(difines);
 
 module.exports={
@@ -43,13 +43,16 @@ module.exports={
 
     },
     async store(req,res){
-        const {price,start_day,end_day,start_office_hour,end_office_hour} = req.body
+        const {price,amount,start_day,end_day,start_office_hour,end_office_hour} = req.body
 
         console.log(req.body)
         // precisa colocar o typing id
 
+      
+
         const job = await Job.create({
             company_id:req.userId,
+            amount,
             typing_id:'',
             price,
             status: false,

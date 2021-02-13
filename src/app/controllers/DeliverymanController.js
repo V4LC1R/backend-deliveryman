@@ -7,14 +7,15 @@ module.exports={
 
         const {name,email,password,cpf_cnpj,latitude,longitude} = req.body
 
-        const verify = await User.findOne({where:{cpf_cnpj,email}})
+        const verify = await User.findOne({where:{cpf_cnpj}})
         if(verify)
             return res.status(400).json({err:'This user already exist'})
 
-        const user = await User.create({name,email,password,cpf_cnpj,latitude,longitude})
+        const user = await User.create({name,email,password,cpf_cnpj})
         await Role.create({user_id:user.id,role:'deliveryman'})
 
         return res.json(user)
             
     }
+
 }

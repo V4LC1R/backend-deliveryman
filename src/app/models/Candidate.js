@@ -1,5 +1,6 @@
 const {Model,DataTypes} = require('sequelize');
 const Crypto = require('crypto');
+const Job = require('./Job');
 
 class Candidate extends Model{
     static init(sequelize){
@@ -15,6 +16,8 @@ class Candidate extends Model{
         )
         this.beforeCreate(async candidate=>{
             candidate.number = Crypto.randomBytes(8).toString('hex')
+
+            
         })
         this.afterCreate(async candidate=>{
             if(candidate.candidate_type ==2 )

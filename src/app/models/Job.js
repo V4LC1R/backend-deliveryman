@@ -10,6 +10,7 @@ class Job extends Model {
                 start_day:DataTypes.DATE,
                 number:DataTypes.STRING,
                 amount:DataTypes.INTEGER,
+                remaining:DataTypes.INTEGER,
                 end_day:DataTypes.DATE,
                 start_office_hour:DataTypes.TIME,
                 end_office_hour:DataTypes.TIME,
@@ -19,25 +20,27 @@ class Job extends Model {
                 sequelize
             }
         )
-        this.beforeCreate(async tender=>{
+        this.beforeCreate(async job=>{
             console.log('aqui')
-            if(tender.end_day == '' || tender.end_day == null)
-                tender.typing_id = 1
-            else tender.typing_id = 2
+            if(job.end_day == '' || job.end_day == null)
+                job.typing_id = 1
+            else job.typing_id = 2
 
-            tender.number = Crypto.randomBytes(5).toString('hex')
+            job.number = Crypto.randomBytes(5).toString('hex')
+            job.remaining = job.amount;
 
         })
-        this.afterCreate(async tender=>{
-            if(tender.typing_id == 1) return console.log("Todo mundo ve")
+        this.afterCreate(async job=>{
+            if(job.typing_id == 1) return console.log("Todo mundo ve")
 
-            if(tender.typing_id==2) return console.log("ngm ve só a empresa")
+            if(job.typing_id==2) return console.log("ngm ve só a empresa")
         })
 
-        this.beforeUpdate(async tender=>{
-            const old = this.findOne({where:{number:tender.number}})
+        this.beforeUpdate(async job=>{
+            const old = this.findOne({where:{number:job.number}})
 
-            if(old.status != tender.status) return console.log('Mandar pros fracassados a mudança')
+            if(old.status != job.status) 
+             console.log('Mandar pros fracassados a mudança')
 
             
         })

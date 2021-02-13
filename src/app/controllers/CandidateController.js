@@ -60,14 +60,25 @@ module.exports={
 
         console.log(req.body)
 
-       await Policys.Candidate.forCreate(number,req.userId,res)
+      const verify = await Policys.Candidate.forCreate(number,req.userId,res)
+
+      //return console.log(verify)
+      if(verify.status == false)
+        return res.status(401).json({err:verify.err})
 
        const job = await Job.findOne({where:{number}})
+
+       job.remaining = job.remaining-1
+
+       job.save()
+
+      // await Job.update({remainig:newVaga},{where:{id:job.id}})
 
         const candidate = await Candidate.create({
             job_id:job.id,
             deliveryman_id:req.userId,
             candidate_type:1,
+            status:true,
             number:'',
             amount,
             observation
