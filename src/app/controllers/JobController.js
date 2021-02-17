@@ -5,6 +5,7 @@ const {Policys}= require('../services')
 
 const AcessControl = require('accesscontrol');
 const difines = require('../secure/index');
+const Candidate = require('../models/Candidate');
 
 const concierge = new AcessControl(difines);
 
@@ -36,10 +37,10 @@ module.exports={
 
         const permission = concierge.can(user.role).readOwn('job')
 
-        const job = await Job.findOne({where:{number,company_id:req.userId}})
+        const job = await Job.findOne({where:{number,company_id:req.userId},include:"Candidate"})
         
 
-        return res.json(permission.filter(job.dataValues))
+        return res.json(job)
 
     },
     async store(req,res){
@@ -81,7 +82,7 @@ module.exports={
     async destroy(req,res){
         const { number} = req.body
 
-        await Policys.Job.forDelete(number,req.userId,res)
+        await Policys.Job.forDelete(number,req.userId)
 
         await Job.destroy({where:number})
 

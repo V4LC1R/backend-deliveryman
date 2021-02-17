@@ -3,6 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
    return queryInterface.createTable('users',{
+    // campo de identificação
     id:{
       type:Sequelize.INTEGER.UNSIGNED,
       primaryKey:true,

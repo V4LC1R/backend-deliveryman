@@ -68,8 +68,6 @@ module.exports={
 
        const job = await Job.findOne({where:{number}})
 
-       job.remaining = job.remaining-1
-
        job.save()
 
       // await Job.update({remainig:newVaga},{where:{id:job.id}})

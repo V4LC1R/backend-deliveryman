@@ -8,6 +8,7 @@ const Job = require('../app/models/Job')
 
 const Candidate = require('../app/models/Candidate')
 const Candidate_type = require('../app/models/Candidate_type')
+const Model_job = require('../app/models/Model_job')
 
 
 const connection = new Sequelize(dbConfig)
@@ -19,6 +20,7 @@ Job_types.init(connection)
 Job.init(connection)
 Candidate_type.init(connection)
 Candidate.init(connection)
+Model_job.init(connection)
 
 User.associate(connection.models)
 Role.associate(connection.models)
@@ -27,5 +29,6 @@ Job_types.associate(connection.models)
 Job.associate(connection.models)
 Candidate_type.associate(connection.models)
 Candidate.associate(connection.models)
+Model_job.associate(connection.models)
 
 module.exports= connection 

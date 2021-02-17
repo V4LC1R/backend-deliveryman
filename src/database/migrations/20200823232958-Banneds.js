@@ -23,6 +23,7 @@ module.exports = {
         type:Sequelize.TEXT,
         allowNull:false
       },
+      //se o usuário está banido ou não
       status:{
         type:Sequelize.BOOLEAN,
         allowNull:false

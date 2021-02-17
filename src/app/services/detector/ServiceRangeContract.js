@@ -1,5 +1,5 @@
 const {Op}=require('sequelize');
-
+const sequelize = require('../../../database/index')
 const {OverlapQueue} = require('../compare/index')
 
 

@@ -1,20 +1,47 @@
 const Job = require('../../models/Job')
 
 module.exports={
-    async forUpdate(body,user,res){
+    async forCreate(body,user){
 
-        const {number} = body
+        // validar data
 
-        const job = await Job.findOne({where:{number,company_id:user}})
+        //validar price
 
-        if(!job) return res.status(401).json({err:'This job is not exist'})
+        //validar payment
 
-       
+
+
+    },  
+    async forUpdate(att,number,user){
+        /* validar estagio
+            -- não pode ter nehuma candidatura aceita
+            -- nehum contrato aceito
+            -- não pode estar delete_mode_status: true
+        */
+
+       /* validar data
+            -- a data de inicio não pode ser mudada
+            -- data final não pode ser menor que hoje e nem menor que data inicial
+       */
+
+       /* validar valores
+            -- o valor não pode ser menor do que o acordo regional
+            -- o valor do posicionamento do job não pode mudar        
+       */
+
+
+
+
     },
-    async forDelete(number,user,res){
+    async forDelete(number,user){
+        /* validar estagio
+            -- não pode ter nehuma candidatura aceita
+            -- nehum contrato aceito
+            
+        */
 
     },
-    async forCancel(){}
+    async forCancel(number,user){}
 }
 
 // ele querer colocar mais pessoas em uma job

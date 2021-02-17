@@ -19,7 +19,46 @@ module.exports = {
         onUpdate:'CASCADE',
         onDelete:'CASCADE'
       },
-      //module type
+      //numero de identificação do job
+      number:{
+        type:Sequelize.STRING,
+        allowNull:false
+      },
+      price:{
+        type:Sequelize.DECIMAL(10,2),
+        allowNull:false
+      },
+      //vagas abertas
+      amount:{
+        type:Sequelize.INTEGER,
+        allowNull:false
+      },
+      //vagas restantes
+      remaining:{
+        type:Sequelize.INTEGER,
+        allowNull:true
+      },
+      //ainda contratando
+      status:{
+        type:Sequelize.BOOLEAN,
+        allowNull:false
+      },
+      //se está excluido
+      delete_status:{
+        type:Sequelize.BOOLEAN,
+        allowNull:false
+      },
+      mode_job_id:{
+        type:Sequelize.INTEGER.UNSIGNED,
+        allowNull:false,
+        references:{
+          model:'mode_job',
+          key:'id'
+        },
+        onUpdate:'CASCADE',
+        onDelete:'CASCADE'
+      },
+      //saber se o Job é aberto ou fechado ao público
       typing_id:{
         type:Sequelize.INTEGER.UNSIGNED,
         allowNull:false,
@@ -29,26 +68,6 @@ module.exports = {
         },
         onUpdate:'CASCADE',
         onDelete:'CASCADE'
-      },
-      number:{
-        type:Sequelize.STRING,
-        allowNull:false
-      },
-      price:{
-        type:Sequelize.DECIMAL(10,2),
-        allowNull:false
-      },
-      amount:{
-        type:Sequelize.INTEGER,
-        allowNull:false
-      },
-      remaining:{
-        type:Sequelize.INTEGER,
-        allowNull:true
-      },
-      status:{
-        type:Sequelize.BOOLEAN,
-        allowNull:false
       },
       start_day:{
         type:Sequelize.DATE,

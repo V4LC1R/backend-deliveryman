@@ -7,13 +7,13 @@ const User = require("../../models/User")
 module.exports ={
     async forCreate(number,user){
 
-        console.log(number)
-
         const job = await Job.findOne({where:{number}})
 
-        //valida a existencia do job
+        //valida a existencia do job, que ainda está ativo e não deletado
         if(!job)
             return {err:"This Job not exist",status:false}
+
+        //validar se o job está apresentável
 
         // valida se a empresa não está banida
         if(await Banned.findOne({where:{user_id:job.company_id,status:true}}))
@@ -24,47 +24,52 @@ module.exports ={
             return {err:"You cannot apply for this job, because your was candidate for this job",status:false}
         
         // verifcar a data de contração
-
-
+            
         // verifica se o job está ativo
-        if(job.active == true)
+        if(job.status == true)
             return {err:"You cannot apply for this job, because this job was inativate",status:false}
-
-        //verificar se o job e aberto
-        if(job.job_type ==2)
-            return {err:"You cannot apply for this job, because this job is close",status:false}
 
 
         //Verifica se tem vagas
-        if(job.remaining == 0)
+        if(job.remaining <= 0)
             return {err:"You cannot apply for this job, don´t has remaning",status:false}
 
         return {status:true}
 
     },
-    async forUpdate(number,user,res){
+    async forUpdate(number,user){
         const candidate = await Candidate.findOne({where:{number,deliveryman_id:user}})
 
         // valida a existencia da candidatura
         if(!candidate)
-            return res.status(401).json({err:"this candidate does not exist"})
+            return {err:"this candidate does not exist",status:false}
            
         // verifica se tem um estatus null
         if(candidate.status == true || candidate.status == false )
-            return res.status(401).json({err:"this candidate was accept/reject"})
+            return {err:"this candidate was accept/reject",status:false}
 
-        return 
+        return {status:true}
     },
-    async forDelete(number,user,res){
+    async forDelete(number,user){
         const candidate = await Candidate.findOne({where:{number,deliveryman_id:user}})
 
         if(!candidate)
-            return res.status(401).json({err:"this candidate does not exist"})
+            return {err:"this candidate does not exist",status:false}
            
         if(candidate.status == true || candidate.status == false)
-            return res.status(401).json({err:"this candidate was accept/reject"})
+            return {err:"this candidate was accept/reject",status:false}
 
-        return 
+        return {status:true}
     },
-    async forCancel(){}
+    async forCancel(number,user){
+        const candidate = await Candidate.findOne({where:{number,deliveryman_id:user}})
+
+        if(!candidate)
+            return {err:"this candidate does not exist",status:false}
+           
+        if(candidate.status == true || candidate.status == false)
+            return {err:"this candidate was accept/reject",status:false}
+
+        return {status:true}
+    }
 }
