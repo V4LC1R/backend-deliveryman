@@ -24,11 +24,19 @@ module.exports ={
             return {err:"You cannot apply for this job, because your was candidate for this job",status:false}
         
         // verifcar a data de contração
-            
+            const today = new Date()
+            const contract_day = new Date(job.start_day);
+
+        if(contract_day<today)
+            return {err:"You cannot apply for this job, because",status:false}
+
         // verifica se o job está ativo
         if(job.status == true)
             return {err:"You cannot apply for this job, because this job was inativate",status:false}
 
+        //valido se o Job está deletado
+        if(job.delete_status== true)
+            return {err:"You cannot apply for this job, because this job was delete",status:false}
 
         //Verifica se tem vagas
         if(job.remaining <= 0)

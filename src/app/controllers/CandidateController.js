@@ -76,7 +76,6 @@ module.exports={
             job_id:job.id,
             deliveryman_id:req.userId,
             candidate_type:1,
-            status:true,
             number:'',
             amount,
             observation

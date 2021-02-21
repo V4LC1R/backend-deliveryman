@@ -1,3 +1,4 @@
+const Candidate = require('../../models/Candidate')
 const Job = require('../../models/Job')
 
 module.exports={
@@ -13,6 +14,20 @@ module.exports={
 
     },  
     async forUpdate(att,number,user){
+
+        const job= await Job.findOne({where:{number:number}})
+        const muchCandidatesAcepts = await Candidate.count({where:{job_id:job.id,status:true}})
+
+        if(muchCandidatesAcepts > 0)
+            return {err:"This work cannot be edited, because it already has an accepted application",status:false}
+
+        if(job.delete_status==true)
+            return {err:"You cannot apply for this job, because this job was delete",status:false}
+
+        const jobStartDay = new Date(job.start_day)
+        const attStarDay = new Date(att.start_day)
+
+        
         /* validar estagio
             -- não pode ter nehuma candidatura aceita
             -- nehum contrato aceito
