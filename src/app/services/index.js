@@ -4,6 +4,7 @@ const Job = require('./policy/ServicesPolicysJob')
 
 const inContract = require('./detector/ServiceRangeContract')
 const Haversine = require('./geolocalization/SevicesHaversine')
+const Compare = require('./compare/index')
 
 module.exports ={
     Policys:{
@@ -15,5 +16,6 @@ module.exports ={
     Detector:{
         inContract
     },
-    Haversine
+    Haversine,
+    Compare
 }

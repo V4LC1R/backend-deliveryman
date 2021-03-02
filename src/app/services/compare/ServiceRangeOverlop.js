@@ -1,4 +1,4 @@
-const {range} =require('./base')
+const {range} =require('./ServiceTimeRange')
 
 module.exports = {
     async overlap(one,two){

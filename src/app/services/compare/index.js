@@ -1,9 +1,11 @@
-const Base = require('./base')
-const Overlap = require('./overlap')
-const OverlapQueue = require('./overlapQueue')
+const Base = require('./ServiceTimeRange')
+const Overlap = require('./ServiceRangeOverlop')
+const OverlapQueue = require('./ServiceOverlapQueue')
+const DateCompare = require('./ServiceDateCompare')
 
 module.exports={
     Base,
     Overlap,
-    OverlapQueue
+    OverlapQueue,
+    DateCompare
 }

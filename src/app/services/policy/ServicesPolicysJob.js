@@ -26,7 +26,8 @@ module.exports={
 
         const jobStartDay = new Date(job.start_day)
         const attStarDay = new Date(att.start_day)
-
+        const today = new Date();
+       
         
         /* validar estagio
             -- não pode ter nehuma candidatura aceita

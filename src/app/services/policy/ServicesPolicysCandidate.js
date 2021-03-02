@@ -4,6 +4,8 @@ const Job = require("../../models/Job")
 const Role = require("../../models/Role")
 const User = require("../../models/User")
 
+const {BaseDateCompare} = require('../compare')
+
 module.exports ={
     async forCreate(number,user){
 
@@ -27,9 +29,10 @@ module.exports ={
             const today = new Date()
             const contract_day = new Date(job.start_day);
 
-        if(contract_day<today)
-            return {err:"You cannot apply for this job, because",status:false}
+        if(await DateCompare.lessThan(contract_day,today))
+            return {err:" The application period is over",status:false}
 
+        
         // verifica se o job está ativo
         if(job.status == true)
             return {err:"You cannot apply for this job, because this job was inativate",status:false}
